@@ -45,7 +45,7 @@ public class playerController : MonoBehaviour
     {
         if (!MoveEnable) return;
         isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, whatIsGround);
-        hpSlider.value = Mathf.Lerp(hpSlider.value, Hp, hpMoveSpeed*Time .deltaTime );
+        hpSlider.value = Hp;// Mathf.Lerp(hpSlider.value, Hp, hpMoveSpeed*Time .deltaTime );
         //if (Input.GetKey(left))
         //{
         //    theRB.velocity = new Vector2(-moveSpeed, theRB.velocity.y);
@@ -90,6 +90,10 @@ public class playerController : MonoBehaviour
             collision.gameObject.GetComponent<Trap>().ShowAniamtion();
             Hp -= 2;
             
+        }else if(collision .tag == "HX")//回血
+        {
+            Destroy(collision.gameObject);
+            Hp += 2;
         }
        
     }
