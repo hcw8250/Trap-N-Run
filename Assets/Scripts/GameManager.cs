@@ -1,4 +1,5 @@
-﻿ using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
     {
         //Timer = PlayerPrefs.GetFloat(Key,0);
         Timer = 0;
-
+        Time.timeScale = 1;
     }
     public void StartDelTime()
     {
@@ -65,5 +66,18 @@ public class GameManager : MonoBehaviour
     public void Pause(int scale)
     {
         Time.timeScale = scale;
+    }
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
+    internal void EndGame()
+    {
+        
     }
 }

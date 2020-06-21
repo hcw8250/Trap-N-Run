@@ -27,6 +27,8 @@ public class playerController : MonoBehaviour
     public float Hp=10;
     public float hpMoveSpeed = 1;
     public GameObject warningImg;
+    public GameObject endPanel;
+    public GameManager manager;
     public void StartMove()
     {
         MoveEnable = true;
@@ -81,6 +83,12 @@ public class playerController : MonoBehaviour
         {
             warningImg.SetActive(true);
         }
+        if(Hp <= 0)
+        {
+            Time.timeScale = 0;
+            endPanel.SetActive(true);
+            manager.EndGame();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -93,7 +101,8 @@ public class playerController : MonoBehaviour
         }else if(collision .tag == "HX")//回血
         {
             Destroy(collision.gameObject);
-            Hp += 2;
+            if (Hp <= 8)
+                Hp += 2;
         }
        
     }
