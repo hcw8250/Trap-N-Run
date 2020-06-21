@@ -40,18 +40,20 @@ public class playerController : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, whatIsGround);
         hpSlider.value = Mathf.Lerp(hpSlider.value, Hp, hpMoveSpeed*Time .deltaTime );
-        if (Input.GetKey(left))
-        {
-            theRB.velocity = new Vector2(-moveSpeed, theRB.velocity.y);
-        }
-        else if (Input.GetKey(right))
-        {
-            theRB.velocity = new Vector2(moveSpeed, theRB.velocity.y);
-        }
-        else
-        {
-            theRB.velocity = new Vector2(0, theRB.velocity.y);
-        }
+        //if (Input.GetKey(left))
+        //{
+        //    theRB.velocity = new Vector2(-moveSpeed, theRB.velocity.y);
+        //}
+        //else
+        //if (Input.GetKey(right))
+        //{
+        //    theRB.velocity = new Vector2(moveSpeed, theRB.velocity.y);
+        //}
+        //else
+        //{
+        //    theRB.velocity = new Vector2(0, theRB.velocity.y);
+        //}
+        theRB.velocity = new Vector2(moveSpeed, theRB.velocity.y);
 
         if (Input.GetKeyDown(jump) && isGrounded)
         {
