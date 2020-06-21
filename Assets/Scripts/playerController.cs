@@ -22,10 +22,15 @@ public class playerController : MonoBehaviour
     public LayerMask whatIsGround;
 
     private Animator anim;
-
+    public bool MoveEnable = false;
     public Slider hpSlider;
     public float Hp=10;
     public float hpMoveSpeed = 1;
+    public GameObject warningImg;
+    public void StartMove()
+    {
+        MoveEnable = true;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +43,7 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!MoveEnable) return;
         isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, whatIsGround);
         hpSlider.value = Mathf.Lerp(hpSlider.value, Hp, hpMoveSpeed*Time .deltaTime );
         //if (Input.GetKey(left))
@@ -71,7 +77,10 @@ public class playerController : MonoBehaviour
 
         anim.SetFloat("Speed", Mathf.Abs(theRB.velocity.x));
         anim.SetBool("Grounded", isGrounded);
-
+        if (Hp <= 4)
+        {
+            warningImg.SetActive(true);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -80,7 +89,9 @@ public class playerController : MonoBehaviour
         {
             collision.gameObject.GetComponent<Trap>().ShowAniamtion();
             Hp -= 2;
+            
         }
        
     }
+   
 }
