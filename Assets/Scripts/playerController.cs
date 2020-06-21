@@ -21,7 +21,7 @@ public class playerController : MonoBehaviour
     public float groundCheckRadius;
     public LayerMask whatIsGround;
 
-    private Animator anim;
+    public Animator anim;
     public bool MoveEnable = false;
     public Slider hpSlider;
     public float Hp=10;
@@ -30,6 +30,10 @@ public class playerController : MonoBehaviour
     public GameObject endPanel;
     public GameManager manager;
     public int getCoin=0;
+    public void SetPlayer(Animator ani)
+    {
+        anim = ani;
+    }
     public void StartMove()
     {
         MoveEnable = true;
@@ -38,7 +42,6 @@ public class playerController : MonoBehaviour
     void Start()
     {
         theRB = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
         hpSlider.maxValue = Hp;
         hpSlider.value = Hp;
     }
@@ -94,12 +97,12 @@ public class playerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision .tag == "XJ")//陷阱
+        if(collision .tag == "XJ")
         {
             collision.gameObject.GetComponent<Trap>().ShowAniamtion();
             Hp -= 2;
             
-        }else if(collision .tag == "HX")//回血
+        }else if(collision .tag == "HX")
         {
             Destroy(collision.gameObject);
             if (Hp <= 8)

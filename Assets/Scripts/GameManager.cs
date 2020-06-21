@@ -7,17 +7,25 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Text timeTex,scoreText,coinTEXT;
+    public Text timeTex,scoreText,coinTEXT,maxScoreTex;
     public bool DelTime = false;
     private float Timer;//计时s
     public string Key = "Timer";
-  
+    private int max;
     // Start is called before the first frame update
     void Start()
     {
         //Timer = PlayerPrefs.GetFloat(Key,0);
         Timer = 0;
         Time.timeScale = 1;
+        max = PlayerPrefs.GetInt(Key, 0);
+        if(max > 0)
+        {
+            maxScoreTex.text ="Max Score:"+max.ToString();
+        }else
+        {
+            maxScoreTex.text = "";
+        }
     }
     public void StartDelTime()
     {
@@ -31,6 +39,7 @@ public class GameManager : MonoBehaviour
         {
             Timer += Time.deltaTime;
             timeTex.text = GetTime();
+            
         }
     }
     //private void OnDestroy()
@@ -82,5 +91,10 @@ public class GameManager : MonoBehaviour
         score += getcoin * 10;
         scoreText.text = "Score:" + score;
         coinTEXT.text = "Get Coin:" + getcoin;
+        if(score > max)
+        {
+            maxScoreTex.text = "Max Score:" + score;
+            PlayerPrefs.SetInt(Key,score);
+        }
     }
 }
