@@ -36,6 +36,7 @@ public class Trap : MonoBehaviour
                 render.sprite = sprites[i];
                 yield return wait;
             }
+            yield return null;
             Destroy(gameObject);
         }
     }

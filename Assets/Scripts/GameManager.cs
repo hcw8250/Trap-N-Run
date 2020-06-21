@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Text timeTex;
+    public Text timeTex,scoreText,coinTEXT;
     public bool DelTime = false;
     private float Timer;//计时s
     public string Key = "Timer";
@@ -76,8 +76,11 @@ public class GameManager : MonoBehaviour
 #endif
     }
 
-    internal void EndGame()
+    internal void EndGame(int getcoin)
     {
-        
+        int score = (int)Timer * 10;
+        score += getcoin * 10;
+        scoreText.text = "Score:" + score;
+        coinTEXT.text = "Get Coin:" + getcoin;
     }
 }

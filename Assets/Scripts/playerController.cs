@@ -29,6 +29,7 @@ public class playerController : MonoBehaviour
     public GameObject warningImg;
     public GameObject endPanel;
     public GameManager manager;
+    public int getCoin=0;
     public void StartMove()
     {
         MoveEnable = true;
@@ -87,7 +88,7 @@ public class playerController : MonoBehaviour
         {
             Time.timeScale = 0;
             endPanel.SetActive(true);
-            manager.EndGame();
+            manager.EndGame(getCoin);
         }
     }
 
@@ -103,6 +104,10 @@ public class playerController : MonoBehaviour
             Destroy(collision.gameObject);
             if (Hp <= 8)
                 Hp += 2;
+        }else if(collision .tag == "Coin")
+        {
+            Destroy(collision.gameObject);
+            getCoin += 1;
         }
        
     }
