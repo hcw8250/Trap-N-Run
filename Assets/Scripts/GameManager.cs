@@ -18,14 +18,19 @@ public class GameManager : MonoBehaviour
         //Timer = PlayerPrefs.GetFloat(Key,0);
         Timer = 0;
         Time.timeScale = 1;
-        max = PlayerPrefs.GetInt(Key, 0);
-        if(max > 0)
+        if (maxScoreTex != null)
         {
-            maxScoreTex.text ="Max Score:"+max.ToString();
-        }else
-        {
-            maxScoreTex.text = "";
+            max = PlayerPrefs.GetInt(Key, 0);
+            if (max > 0)
+            {
+                maxScoreTex.text = "Max Score:" + max.ToString();
+            }
+            else
+            {
+                maxScoreTex.text = "";
+            }
         }
+       
     }
     public void StartDelTime()
     {
